@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = MeasurementViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack(alignment: .bottom) {
+            ARViewContainer(viewModel: viewModel)
+                .edgesIgnoringSafeArea(.all)
+
+            Button(action: {
+                viewModel.reset()
+            }) {
+                Text("Reset")
+                    .font(.headline)
+                    .padding()
+                    .background(.ultraThinMaterial)
+                    .cornerRadius(12)
+            }
+            .padding(.bottom, 40)
         }
-        .padding()
     }
 }
 
